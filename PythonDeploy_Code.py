@@ -32,6 +32,8 @@ class stackcreation():
                 StackName='assnig'
             )
             print("Delete Complete")
+        else:
+            print("Template is created successfully")
 
 lambdafunctiondeploy.ziper().zipping()
 print("Done calling zipper")
