@@ -15,4 +15,4 @@ class ld():
                 'LocationConstraint': 'ap-south-1'
             },
         )
-        res = lambda_upload.upload_file('lambda-zip.zip', 'lambda-bucket-zip1', 'lambda-zip.zip')
+        res = lambda_upload.upload_file('lambda-zip.zip', 'codebucket-infy-lam', 'lambda-zip.zip')
