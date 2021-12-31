@@ -31,6 +31,7 @@ class stackcreation():
             deleting = client.delete_stack(
                 StackName='assnig'
             )
+            lambdafunctiondeploy.deletebucket().deleteobject()
             print("Delete Complete")
         else:
             print("Template is created successfully")
