@@ -16,3 +16,19 @@ class ld():
             },
         )
         res = lambda_upload.upload_file('lambda-zip.zip', 'codebucket-infy-lam', 'lambda-zip.zip')
+class deletebucket():
+    def deleteobject(self):
+        client = boto3.client('s3')
+        countobject = client.list_objects(
+            Bucket='codebucket-infy-lam'
+        )
+        if(len(countobject['Contents']) > 0):
+            client.delete_object(
+                Bucket='codebucket-infy-lam',
+                Key='lambda-zip.zip'
+            )
+        else:
+            pass
+        client.delete_bucket(
+            Bucket='codebucket-infy-lam'
+        )
