@@ -37,7 +37,7 @@ Resources:
           - IAM
           - Arn
       Code:
-        S3Bucket: lambda-bucket-zip1
+        S3Bucket: codebucket-infy-lam
         S3Key: lambda-zip.zip
       Runtime: python3.8
       Handler: lambda-zip.handler
