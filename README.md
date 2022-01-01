@@ -1,6 +1,6 @@
 # Assingnments
-1) PythonDeploy_code.py:
-  This file is the main file which deploy everything on aws. This basically creates a stack using file Week_1_final and deploy it on aws. Then it monitors the status of stack.
+1)PythonDeploy_code.py:
+  This file is the main file which deploy everything on aws. This basically creates a stack of file "Week_1_final" and deploy it on aws. Then it monitors the status of stack.
   If the status is CREATION_COMPLETE then it prints "template is created succesfully" and if the status is ROLLBACK_COMPLETE then it deletes the stack and also the bucket which
   contains lambdafunction zip file.
 
