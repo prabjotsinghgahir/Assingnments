@@ -39,7 +39,7 @@ class stackcreation():
 lambdafunctiondeploy.ziper().zipping()
 print("Done calling zipper")
 time.sleep(5)
-lambdafunctiondeploy.ld().lc()
+lambdafunctiondeploy.lambdafunction().lambdafunctionupload()
 print("Done calling lambda deployer")
 time.sleep(10)
 stackcreation().stack()
