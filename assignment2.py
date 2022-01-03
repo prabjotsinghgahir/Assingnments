@@ -1,4 +1,3 @@
-#ResponseMetadata IsTruncated Marker Contents Name Prefix MaxKeys EncodingType
 import boto3
 client = boto3.client('s3')
 bucket = client.list_objects(
