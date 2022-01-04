@@ -28,15 +28,15 @@ class stackcreation():
             )
         except client.exceptions.AlreadyExistsException:
             print("Udating stack")
-            #try:
-            updatestack = client.update_stack(
-                StackName='assnig',
-                UsePreviousTemplate=True,
-                Capabilities=['CAPABILITY_IAM'],
-                Parameters=parameter
-            )
-            #except client.exceptions.ClientError:
-            print("No Updates to perform")
+            try:
+                updatestack = client.update_stack(
+                    StackName='assnig',
+                    UsePreviousTemplate=True,
+                    Capabilities=['CAPABILITY_IAM'],
+                    Parameters=parameter
+                )
+            except client.exceptions.ClientError:
+                print("No Updates to perform")
             print("stack Updated")
     def stackstatus(self):
         response = client.describe_stacks(
