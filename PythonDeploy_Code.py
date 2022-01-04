@@ -13,7 +13,7 @@ parameter = [
     },
     {
         'ParameterKey': 'S3Destbucket',
-        'ParameterValue': 'dest-bucket-psg'
+        'ParameterValue': 'destination-bucket-psg'
     }
 ]
 
