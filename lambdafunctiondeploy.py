@@ -9,26 +9,14 @@ class ziper():
 class lambdafunction():
     def lambdafunctionupload(self):
         lambda_upload = boto3.client('s3')
-        bucket_code = lambda_upload.create_bucket(
-            Bucket='codebucket-infy-lam',
-            CreateBucketConfiguration={
-                'LocationConstraint': 'ap-south-1'
-            },
-        )
-        res = lambda_upload.upload_file('lambda-zip.zip', 'codebucket-infy-lam', 'lambda-zip.zip')
-class deletebucket():
-    def deleteobject(self):
-        client = boto3.client('s3')
-        countobject = client.list_objects(
-            Bucket='codebucket-infy-lam'
-        )
-        if(len(countobject['Contents']) > 0):
-            client.delete_object(
+        try:
+            bucket_code = lambda_upload.create_bucket(
                 Bucket='codebucket-infy-lam',
-                Key='lambda-zip.zip'
+                CreateBucketConfiguration={
+                    'LocationConstraint': 'ap-south-1'
+                },
             )
-        else:
+        except lambda_upload.exceptions.BucketAlreadyOwnedByYou:
             pass
-        client.delete_bucket(
-            Bucket='codebucket-infy-lam'
-        )
+        res = lambda_upload.upload_file('lambda-zip.zip', 'codebucket-infy-lam', 'lambda-zip.zip')
+

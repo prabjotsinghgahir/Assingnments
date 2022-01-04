@@ -22,12 +22,11 @@ class stackcreation():
                 Capabilities = ['CAPABILITY_IAM'],
                 Parameters= parameter
             )
-        except client.exceptions.AlreadyExistsException as errr:
+        except client.exceptions.AlreadyExistsException:
             print("Udating stack")
             try:
                 updatestack = client.update_stack(
                     StackName='assnig',
-                    #TemplateBody=reading,
                     UsePreviousTemplate=True,
                     Capabilities=['CAPABILITY_IAM'],
                     Parameters=parameter
@@ -45,17 +44,16 @@ class stackcreation():
             deleting = client.delete_stack(
                 StackName='assnig'
             )
-            lambdafunctiondeploy.deletebucket().deleteobject()
             print("Delete Complete")
         else:
             print("Template is created successfully")
 
-'''lambdafunctiondeploy.ziper().zipping()
+lambdafunctiondeploy.ziper().zipping()
 print("Done calling zipper")
 time.sleep(5)
 lambdafunctiondeploy.lambdafunction().lambdafunctionupload()
 print("Done calling lambda deployer")
-time.sleep(10)'''
+time.sleep(10)
 stackcreation().stack()
 time.sleep(90)
 stackcreation().stackstatus()
