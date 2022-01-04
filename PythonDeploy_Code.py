@@ -1,15 +1,19 @@
 import lambdafunctiondeploy
 import boto3
 import time
-opening_temp = open("week_1_final")
+opening_temp = open("Week_1_final")
 reading = opening_temp.read()
 
 client = boto3.client('cloudformation')
 
 parameter = [
     {
-        'ParameterKey': 'S3Bucketname',
+        'ParameterKey': 'S3SourceBucketname',
         'ParameterValue':'source-bucket-psg'
+    },
+    {
+        'ParameterKey': 'S3Destbucket',
+        'ParameterValue': 'dest-bucket-psg'
     }
 ]
 

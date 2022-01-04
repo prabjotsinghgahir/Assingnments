@@ -7,7 +7,7 @@ Parameters:
     Type: String
     Default: destination-bucket-psg
 Resources:
-  SourceBucketpsg:
+  SourceBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
       BucketName: !Ref S3SourceBucketname
