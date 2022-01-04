@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Parameters:
-  S3Bucketname:
+  S3SourceBucketname:
     Type: String
     Default: innfy-pr-h
   S3Destbucket:
@@ -10,7 +10,7 @@ Resources:
   SourceBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: !Ref S3Bucketname
+      BucketName: !Ref S3SourceBucketname
       NotificationConfiguration:
         LambdaConfigurations:
           - Event: 's3:ObjectCreated:*'
