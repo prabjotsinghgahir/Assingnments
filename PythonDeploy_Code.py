@@ -9,7 +9,7 @@ client = boto3.client('cloudformation')
 parameter = [
     {
         'ParameterKey': 'S3Bucketname',
-        'ParameterValue':'source-bucket-psg'
+        'ParameterValue':'srce-bucket-psg'
     },
     {
         'ParameterKey': 'S3Destbucket',
