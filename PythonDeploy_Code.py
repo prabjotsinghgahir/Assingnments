@@ -9,18 +9,32 @@ client = boto3.client('cloudformation')
 parameter = [
     {
         'ParameterKey': 'S3Bucketname',
-        'ParameterValue':'innfy-pr-h1'
+        'ParameterValue':'source-bucket-psg'
     }
 ]
 
 class stackcreation():
     def stack(self):
-        result = client.create_stack(
-            StackName='assnig',
-            TemplateBody=reading,
-            Capabilities = ['CAPABILITY_IAM'],
-            Parameters= parameter
-        )
+        try:
+            result = client.create_stack(
+                StackName='assnig',
+                TemplateBody=reading,
+                Capabilities = ['CAPABILITY_IAM'],
+                Parameters= parameter
+            )
+        except client.exceptions.AlreadyExistsException as errr:
+            print("Udating stack")
+            try:
+                updatestack = client.update_stack(
+                    StackName='assnig',
+                    #TemplateBody=reading,
+                    UsePreviousTemplate=True,
+                    Capabilities=['CAPABILITY_IAM'],
+                    Parameters=parameter
+                )
+            except client.exceptions.ClientError:
+                print("No Updates to perform")
+            print("stack Updated")
     def stackstatus(self):
         response = client.describe_stacks(
             StackName='assnig'
@@ -36,12 +50,12 @@ class stackcreation():
         else:
             print("Template is created successfully")
 
-lambdafunctiondeploy.ziper().zipping()
+'''lambdafunctiondeploy.ziper().zipping()
 print("Done calling zipper")
 time.sleep(5)
 lambdafunctiondeploy.lambdafunction().lambdafunctionupload()
 print("Done calling lambda deployer")
-time.sleep(10)
+time.sleep(10)'''
 stackcreation().stack()
 time.sleep(90)
 stackcreation().stackstatus()

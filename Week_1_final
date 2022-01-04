@@ -4,7 +4,7 @@ Parameters:
     Type: String
     Default: innfy-pr-h
 Resources:
-  S3Bucket1:
+  SourceBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
       BucketName: !Ref S3Bucketname
@@ -53,7 +53,7 @@ Resources:
             Principal:
               Service: lambda.amazonaws.com
             Action: 'sts:AssumeRole'
-  S3Bucket2:
+  DestinationBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
         BucketName: 'output-b-one'
