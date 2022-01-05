@@ -12,7 +12,7 @@ parameter = [
         'ParameterValue':'source-bucket-psg'
     },
     {
-        'ParameterKey': 'S3Destbucket2',
+        'ParameterKey': 'S3Destbucket',
         'ParameterValue': 'detination-bucket-psg'
     }
 ]
@@ -52,12 +52,12 @@ class stackcreation():
         else:
             print("Template is created successfully")
 
-lambdafunctiondeploy.ziper().zipping()
-print("Done calling zipper")
-time.sleep(5)
-lambdafunctiondeploy.lambdafunction().lambdafunctionupload()
-print("Done calling lambda deployer")
-time.sleep(10)
+#lambdafunctiondeploy.ziper().zipping()
+#print("Done calling zipper")
+#time.sleep(5)
+#lambdafunctiondeploy.lambdafunction().lambdafunctionupload()
+#print("Done calling lambda deployer")
+#time.sleep(10)
 stackcreation().stack()
 time.sleep(90)
 stackcreation().stackstatus()
