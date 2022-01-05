@@ -13,7 +13,7 @@ parameter = [
     },
     {
         'ParameterKey': 'S3Destbucket',
-        'ParameterValue': 'detination-bucket-psg'
+        'ParameterValue': 'destinoo-bucket-psg'
     }
 ]
 
@@ -31,7 +31,8 @@ class stackcreation():
             try:
                 updatestack = client.update_stack(
                     StackName='assnig',
-                    UsePreviousTemplate=True,
+                    TemplateBody= reading,
+                    #UsePreviousTemplate=True,
                     Capabilities=['CAPABILITY_IAM'],
                     Parameters=parameter
                 )
@@ -52,12 +53,12 @@ class stackcreation():
         else:
             print("Template is created successfully")
 
-#lambdafunctiondeploy.ziper().zipping()
-#print("Done calling zipper")
-#time.sleep(5)
-#lambdafunctiondeploy.lambdafunction().lambdafunctionupload()
-#print("Done calling lambda deployer")
-#time.sleep(10)
+lambdafunctiondeploy.ziper().zipping()
+print("Done calling zipper")
+time.sleep(5)
+lambdafunctiondeploy.lambdafunction().lambdafunctionupload()
+print("Done calling lambda deployer")
+time.sleep(10)
 stackcreation().stack()
 time.sleep(90)
 stackcreation().stackstatus()
