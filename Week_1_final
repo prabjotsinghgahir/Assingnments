@@ -66,4 +66,4 @@ Resources:
   AnotherBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-        BucketName: 'bucket-for-fun'
+        BucketName: 'infoinfog-for-fun'
