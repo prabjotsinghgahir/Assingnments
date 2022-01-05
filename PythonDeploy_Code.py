@@ -35,8 +35,8 @@ class stackcreation():
                     Capabilities=['CAPABILITY_IAM'],
                     Parameters=parameter
                 )
-            except client.exceptions.ClientError:
-                print("No Updates to perform")
+            except client.exceptions.ClientError as err:
+                print("No Updates to perform", err)
             print("stack Updated")
     def stackstatus(self):
         response = client.describe_stacks(
