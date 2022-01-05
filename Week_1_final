@@ -5,7 +5,7 @@ Parameters:
     Default: innfy-pr-h
   S3Destbucket:
     Type: String
-    Default: destination-bucket-psg
+    Default: dest-bucket-psg
 Resources:
   SourceBucket:
     Type: 'AWS::S3::Bucket'
