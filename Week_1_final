@@ -66,4 +66,4 @@ Resources:
   AnotherBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-        BucketName: 'infoinfog-for-fun'
+        BucketName: 'bucket-to-test'
