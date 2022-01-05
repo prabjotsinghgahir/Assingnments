@@ -3,7 +3,7 @@ Parameters:
   S3Bucketname:
     Type: String
     Default: innfy-pr-h
-  S3Destbucket:
+  S3Destbucket2:
     Type: String
     Default: dest-bucket-psg
 Resources:
@@ -44,7 +44,7 @@ Resources:
         S3Key: lambda-zip.zip
       Environment:
         Variables:
-          takebucket: !Ref S3Destbucket
+          takebucket: !Ref S3Destbucket2
       Runtime: python3.8
       Handler: lambda-zip.handler
   IAM:
@@ -62,4 +62,4 @@ Resources:
   DestinationBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-        BucketName: !Ref S3Destbucket
+        BucketName: !Ref S3Destbucket2
