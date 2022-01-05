@@ -1,8 +1,8 @@
 import lambdafunctiondeploy
 import boto3
 import time
-#opening_temp = open("Week_1_final")
-#reading = opening_temp.read()
+opening_temp = open("Week_1_final")
+reading = opening_temp.read()
 
 client = boto3.client('cloudformation')
 
@@ -19,8 +19,6 @@ parameter = [
 
 class stackcreation():
     def stack(self):
-        opening_temp = open("Week_1_final")
-        reading = opening_temp.read()
         try:
             result = client.create_stack(
                 StackName='assnig',
@@ -29,7 +27,7 @@ class stackcreation():
                 Parameters= parameter
             )
         except client.exceptions.AlreadyExistsException as eror:
-            print("Udating stack:  ",eror)
+            print("Udating stack")
             try:
                 updatestack = client.update_stack(
                     StackName='assnig',
