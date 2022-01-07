@@ -17,7 +17,7 @@ parameter = [
     },
     {
         'ParameterKey': 'S3Destbucket',
-        'ParameterValue': 'destination-bucket-psg'
+        'ParameterValue': 'desti-bucket-psg'
     },
     {
         'ParameterKey': 'LambdaCodeBucket',
@@ -37,12 +37,16 @@ parameter = [
 class StackCreation():
     def create_stack(self):
         try:
-            result = client.create_stack(
+            client.create_stack(
                 StackName=stackname,
                 TemplateBody=reading,
                 Capabilities=['CAPABILITY_IAM'],
                 Parameters=parameter
             )
+            print("Creating Stack")
+            waiter = client.get_waiter('stack_create_complete')
+            waiter.wait(StackName=stackname)
+            print("Stack Created")
         except client.exceptions.AlreadyExistsException as eror:
             print("Updating stack")
             try:
@@ -53,6 +57,8 @@ class StackCreation():
                     Capabilities=['CAPABILITY_IAM'],
                     Parameters=parameter
                 )
+                waiter = client.get_waiter('stack_update_complete')
+                waiter.wait(StackName=stackname)
             except client.exceptions.ClientError as err:
                 print("Printing Error:  ", err)
             print("stack Updated")
@@ -79,5 +85,4 @@ lambdafunctiondeploy.LambdaFunction().lambdafunctionupload(lambda_code_bucket, f
 print("Done calling lambda deployer")
 time.sleep(10)
 StackCreation().create_stack()
-time.sleep(90)
 StackCreation().stackstatus()
