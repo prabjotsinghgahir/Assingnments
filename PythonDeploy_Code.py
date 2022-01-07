@@ -80,9 +80,7 @@ class StackCreation():
 
 lambdafunctiondeploy.ziper().zipping(file_zip)
 print("Done calling zipper")
-time.sleep(5)
 lambdafunctiondeploy.LambdaFunction().lambdafunctionupload(lambda_code_bucket, file_zip)
 print("Done calling lambda deployer")
-time.sleep(10)
 StackCreation().create_stack()
 StackCreation().stackstatus()
