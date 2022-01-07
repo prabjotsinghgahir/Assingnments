@@ -6,6 +6,7 @@ opening_temp = open("Week_1_final")
 reading = opening_temp.read()
 file_zip = 'lambda-zip.py'
 lambda_code_bucket = 'codebucket-infy-lam'
+stackname = 'assnig'
 
 client = boto3.client('cloudformation')
 
@@ -37,7 +38,7 @@ class StackCreation():
     def create_stack(self):
         try:
             result = client.create_stack(
-                StackName='assnig',
+                StackName=stackname,
                 TemplateBody=reading,
                 Capabilities=['CAPABILITY_IAM'],
                 Parameters=parameter
@@ -46,7 +47,7 @@ class StackCreation():
             print("Updating stack")
             try:
                 client.update_stack(
-                    StackName='assnig',
+                    StackName=stackname,
                     TemplateBody=reading,
                     # UsePreviousTemplate=True,
                     Capabilities=['CAPABILITY_IAM'],
@@ -58,13 +59,13 @@ class StackCreation():
 
     def stackstatus(self):
         response = client.describe_stacks(
-            StackName='assnig'
+            StackName=stackname
         )
         res = response['Stacks'][0]['StackStatus']
         print(res)
         if (res == 'ROLLBACK_COMPLETE'):
             client.delete_stack(
-                StackName='assnig'
+                StackName=stackname
             )
             print("Delete Complete")
         else:
