@@ -6,6 +6,9 @@ Parameters:
   S3Destbucket:
     Type: String
     Default: dest-bucket-psg
+  LambdaCodeBucket:
+    Type: String
+    Default: codebucket-infy-lam
 Resources:
   SourceBucket:
     Type: 'AWS::S3::Bucket'
@@ -40,7 +43,7 @@ Resources:
           - IAM
           - Arn
       Code:
-        S3Bucket: codebucket-infy-lam
+        S3Bucket: !Ref LambdaCodeBucket
         S3Key: lambda-zip.zip
       Environment:
         Variables:

@@ -1,22 +1,28 @@
 import boto3
 import os
 import shutil
+
+
 class ziper():
-    def zipping(self):
+    def zipping(self, file_zip):
         cwd = os.getcwd()
-        file_to_zip = 'lambda-zip.py'
-        shutil.make_archive('lambda-zip','zip',cwd,file_to_zip)
-class lambdafunction():
-    def lambdafunctionupload(self):
+        file_to_zip = file_zip.split('.')
+        shutil.make_archive(file_to_zip[0], 'zip', cwd, file_zip)
+
+
+class LambdaFunction():
+    def lambdafunctionupload(self, lambda_code_bucket, file_zip):
         lambda_upload = boto3.client('s3')
         try:
-            bucket_code = lambda_upload.create_bucket(
-                Bucket='codebucket-infy-lam',
+            lambda_upload.create_bucket(
+                Bucket=lambda_code_bucket,
                 CreateBucketConfiguration={
                     'LocationConstraint': 'ap-south-1'
                 },
             )
         except lambda_upload.exceptions.BucketAlreadyOwnedByYou:
             pass
-        res = lambda_upload.upload_file('lambda-zip.zip', 'codebucket-infy-lam', 'lambda-zip.zip')
+        file_zip = file_zip.split('.')
+        file_zip_one = file_zip[0] + ".zip"
+        res = lambda_upload.upload_file(file_zip_one, lambda_code_bucket, file_zip_one)
 
