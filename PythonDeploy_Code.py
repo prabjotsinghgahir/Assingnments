@@ -63,7 +63,7 @@ class StackCreation():
         )
         res = response['Stacks'][0]['StackStatus']
         print(res)
-        if (res == 'ROLLBACK_COMPLETE'):
+        if res == 'ROLLBACK_COMPLETE':
             client.delete_stack(
                 StackName=stackname
             )
