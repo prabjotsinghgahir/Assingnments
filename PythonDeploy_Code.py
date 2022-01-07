@@ -1,6 +1,6 @@
 import lambdafunctiondeploy
 import boto3
-import time
+
 
 opening_temp = open("Week_1_final")
 reading = opening_temp.read()
