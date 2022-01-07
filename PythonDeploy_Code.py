@@ -21,6 +21,14 @@ parameter = [
     {
         'ParameterKey': 'LambdaCodeBucket',
         'ParameterValue': lambda_code_bucket
+    },
+    {
+        'ParameterKey': 'LambdaKey',
+        'ParameterValue': file_zip.split('.')[0]+".zip"
+    },
+    {
+        'ParameterKey': 'LambdaHandler',
+        'ParameterValue': file_zip.split('.')[0]+".handler"
     }
 ]
 

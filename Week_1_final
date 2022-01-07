@@ -9,6 +9,12 @@ Parameters:
   LambdaCodeBucket:
     Type: String
     Default: codebucket-infy-lam
+  LambdaKey:
+    Type: String
+    Default: lambda-zip.zip
+  LambdaHandler:
+    Type: String
+    Default: lambda-zip.handler
 Resources:
   SourceBucket:
     Type: 'AWS::S3::Bucket'
@@ -44,12 +50,12 @@ Resources:
           - Arn
       Code:
         S3Bucket: !Ref LambdaCodeBucket
-        S3Key: lambda-zip.zip
+        S3Key: !Ref LambdaKey
       Environment:
         Variables:
           takebucket: !Ref S3Destbucket
       Runtime: python3.8
-      Handler: lambda-zip.handler
+      Handler: !Ref LambdaHandler
   IAM:
     Type: 'AWS::IAM::Role'
     Properties:
