@@ -1,18 +1,27 @@
-import lambdafunctiondeploy
+#import lambdafunctiondeploy
 import boto3
 
 
-opening_temp = open("Week_1_final")
-reading = opening_temp.read()
-file_zip = 'lambda-zip.py'
-lambda_code_bucket = 'codebucket-infy-lam'
-stack_name = 'assnig'
-source_bucket_name = 'source-bucket-psg'
-destination_bucket_name = 'desti-bucket-psg'
+'''def funccall():
+    callingfunction()
+
+
+a = int(input("Enter how many templates to deploy:  "))
+for i in range(0, a):
+    template_name = input("Enter the template name:  ")
+    opening_temp = open(template_name)
+    reading = opening_temp.read()
+    file_zip = input("Enter lambda function file name:  ")
+    lambda_code_bucket = input("Enter lambda code bucket name:  ")
+    stack_name = input("Enter stack name:  ")
+    source_bucket_name = input("Enter Source bucket name:  ")
+    destination_bucket_name = input("Enter Destination bucket name:  ")
+    funccall()'''
+
 
 client = boto3.client('cloudformation')
 
-parameter = [
+'''parameter = [
     {
         'ParameterKey': 'S3Bucketname',
         'ParameterValue': source_bucket_name
@@ -33,11 +42,11 @@ parameter = [
         'ParameterKey': 'LambdaHandler',
         'ParameterValue': file_zip.split('.')[0]+".handler"
     }
-]
+]'''
 
 
-class StackCreation():
-    def create_stack(self):
+class StackCreation:
+    def create_stack(self, stack_name, reading, parameter):
         try:
             client.create_stack(
                 StackName=stack_name,
@@ -65,7 +74,7 @@ class StackCreation():
                 print("Printing Error:  ", err)
             print("stack Updated")
 
-    def stackstatus(self):
+    def stackstatus(self, stack_name):
         response = client.describe_stacks(
             StackName=stack_name
         )
@@ -80,9 +89,21 @@ class StackCreation():
             print("Template is created successfully")
 
 
-lambdafunctiondeploy.ziper().zipping(file_zip)
-print("Done calling zipper")
-lambdafunctiondeploy.LambdaFunction().lambdafunctionupload(lambda_code_bucket, file_zip)
-print("Done calling lambda deployer")
-StackCreation().create_stack()
-StackCreation().stackstatus()
+'''def callingfunction():
+    lambdafunctiondeploy.ziper().zipping(file_zip)
+    print("Done calling zipper")
+    lambdafunctiondeploy.LambdaFunction().lambdafunctionupload(lambda_code_bucket, file_zip)
+    print("Done calling lambda deployer")
+    StackCreation().create_stack()
+    StackCreation().stackstatus()'''
+
+
+'''opening_temp = open("Week_1_final")
+reading = opening_temp.read()
+file_zip = 'lambda-zip.py'
+lambda_code_bucket = 'codebucket-infy-lam'
+stack_name = 'assnig'
+source_bucket_name = 'source-bucket-psg'
+destination_bucket_name = 'desti-bucket-psg'
+
+client = boto3.client('cloudformation')'''
