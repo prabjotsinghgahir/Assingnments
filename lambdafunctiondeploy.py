@@ -24,6 +24,6 @@ class LambdaFunction:
             pass
         file_zip = file_zip.split('.')
         file_zip_one = file_zip[0] + ".zip"
-        res = lambda_upload.upload_file(file_zip_one, lambda_code_bucket, file_zip_one)
+        lambda_upload.upload_file(file_zip_one, lambda_code_bucket, file_zip_one)
 
 
