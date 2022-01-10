@@ -1,6 +1,31 @@
 import PythonDeploy_Code
 import lambdafunctiondeploy
 
+def call_para():
+    parameter = [
+            {
+                'ParameterKey': 'S3Bucketname',
+                'ParameterValue': source_bucket_name
+            },
+            {
+                'ParameterKey': 'S3Destbucket',
+                'ParameterValue': destination_bucket_name
+            },
+            {
+                'ParameterKey': 'LambdaCodeBucket',
+                'ParameterValue': lambda_code_bucket
+            },
+            {
+                'ParameterKey': 'LambdaKey',
+                'ParameterValue': file_zip.split('.')[0] + ".zip"
+            },
+            {
+                'ParameterKey': 'LambdaHandler',
+                'ParameterValue': file_zip.split('.')[0] + ".handler"
+            }
+        ]
+    return parameter
+
 
 a = int(input("Enter how many templates to deploy:  "))
 
@@ -13,9 +38,14 @@ for i in range(0, a):
     stack_name = input("Enter stack name:  ")
     source_bucket_name = input("Enter Source bucket name:  ")
     destination_bucket_name = input("Enter Destination bucket name:  ")
+    lambdafunctiondeploy.ziper().zipping(file_zip)
+    print("Done calling zipper")
+    lambdafunctiondeploy.LambdaFunction().lambdafunctionupload(lambda_code_bucket, file_zip)
+    print("Done calling lambda deployer")
+    PythonDeploy_Code.StackCreation().create_stack(stack_name, reading, call_para())
+    PythonDeploy_Code.StackCreation().stackstatus(stack_name)
 
-
-parameter = [
+'''parameter = [
     {
         'ParameterKey': 'S3Bucketname',
         'ParameterValue': source_bucket_name
@@ -36,14 +66,9 @@ parameter = [
         'ParameterKey': 'LambdaHandler',
         'ParameterValue': file_zip.split('.')[0]+".handler"
     }
-]
+]'''
 
-lambdafunctiondeploy.ziper().zipping(file_zip)
-print("Done calling zipper")
-lambdafunctiondeploy.LambdaFunction().lambdafunctionupload(lambda_code_bucket, file_zip)
-print("Done calling lambda deployer")
-PythonDeploy_Code.StackCreation().create_stack(stack_name, reading, parameter)
-PythonDeploy_Code.StackCreation().stackstatus(stack_name)
+
 
 '''opening_temp = open("Week_1_final")
 reading = opening_temp.read()

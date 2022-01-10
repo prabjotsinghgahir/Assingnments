@@ -45,7 +45,7 @@ client = boto3.client('cloudformation')
 ]'''
 
 
-class StackCreation:
+class StackCreation():
     def create_stack(self, stack_name, reading, parameter):
         try:
             client.create_stack(
