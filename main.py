@@ -2,7 +2,7 @@ import PythonDeploy_Code
 import lambdafunctiondeploy
 
 
-def call_para():
+def call_parameters():
     parameter = [
             {
                 'ParameterKey': 'S3Bucketname',
@@ -43,7 +43,7 @@ for i in range(0, a):
     print("Done calling zipper")
     lambdafunctiondeploy.LambdaFunction().lambdafunctionupload(lambda_code_bucket, file_zip)
     print("Done calling lambda deployer")
-    PythonDeploy_Code.StackCreation().create_stack(stack_name, reading, call_para())
+    PythonDeploy_Code.StackCreation().create_stack(stack_name, reading, call_parameters())
     PythonDeploy_Code.StackCreation().stackstatus(stack_name)
 
 '''parameter = [
@@ -68,7 +68,6 @@ for i in range(0, a):
         'ParameterValue': file_zip.split('.')[0]+".handler"
     }
 ]'''
-
 
 
 '''opening_temp = open("Week_1_final")
