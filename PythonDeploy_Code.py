@@ -16,7 +16,7 @@ class StackCreation:
             waiter = client.get_waiter('stack_create_complete')
             waiter.wait(StackName=stack_name)
             print("Stack Created")
-        except client.exceptions.AlreadyExistsException as eror:
+        except client.exceptions.AlreadyExistsException:
             print("Updating stack")
             try:
                 client.update_stack(
