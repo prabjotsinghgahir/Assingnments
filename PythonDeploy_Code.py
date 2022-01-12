@@ -4,43 +4,48 @@ client = boto3.client('cloudformation')
 
 
 class StackCreation:
-    def create_stack(self, stack_name, reading, parameter):
+    def __init__(self, stack_name, reading, parameter):
+        self.stack_name = stack_name
+        self.reading = reading
+        self.parameter = parameter
+
+    def create_stack(self):
         try:
             client.create_stack(
-                StackName=stack_name,
-                TemplateBody=reading,
+                StackName=self.stack_name,
+                TemplateBody=self.reading,
                 Capabilities=['CAPABILITY_IAM'],
-                Parameters=parameter
+                Parameters=self.parameter
             )
             print("Creating Stack")
             waiter = client.get_waiter('stack_create_complete')
-            waiter.wait(StackName=stack_name)
+            waiter.wait(StackName=self.stack_name)
             print("Stack Created")
         except client.exceptions.AlreadyExistsException:
             print("Updating stack")
             try:
                 client.update_stack(
-                    StackName=stack_name,
-                    TemplateBody=reading,
+                    StackName=self.stack_name,
+                    TemplateBody=self.reading,
                     # UsePreviousTemplate=True,
                     Capabilities=['CAPABILITY_IAM'],
-                    Parameters=parameter
+                    Parameters=self.parameter
                 )
                 waiter = client.get_waiter('stack_update_complete')
-                waiter.wait(StackName=stack_name)
+                waiter.wait(StackName=self.stack_name)
             except client.exceptions.ClientError as err:
                 print("Printing Error:  ", err)
             print("stack Updated")
 
-    def stackstatus(self, stack_name):
+    def stack_status(self):
         response = client.describe_stacks(
-            StackName=stack_name
+            StackName=self.stack_name
         )
         res = response['Stacks'][0]['StackStatus']
         print(res)
         if res == 'ROLLBACK_COMPLETE':
             client.delete_stack(
-                StackName=stack_name
+                StackName=self.stack_name
             )
             print("Delete Complete")
         else:

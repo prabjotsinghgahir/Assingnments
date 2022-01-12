@@ -1,9 +1,9 @@
 AWSTemplateFormatVersion: 2010-09-09
 Parameters:
-  S3Bucketname:
+  S3BucketName:
     Type: String
     Default: innfy-pr-h
-  S3Destbucket:
+  S3DestinationBucket:
     Type: String
     Default: dest-bucket-psg
   LambdaCodeBucket:
@@ -19,7 +19,7 @@ Resources:
   SourceBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: !Ref S3Bucketname
+      BucketName: !Ref S3BucketName
       NotificationConfiguration:
         LambdaConfigurations:
           - Event: 's3:ObjectCreated:*'
@@ -38,7 +38,7 @@ Resources:
       SourceAccount:
         Ref: 'AWS::AccountId'
       SourceArn:
-        'Fn::Sub': 'arn:aws:s3:::${S3Bucketname}'
+        'Fn::Sub': 'arn:aws:s3:::${S3BucketName}'
     DependsOn:
       - LambdaFunction
   LambdaFunction:
@@ -53,7 +53,7 @@ Resources:
         S3Key: !Ref LambdaKey
       Environment:
         Variables:
-          takebucket: !Ref S3Destbucket
+          takebucket: !Ref S3DestinationBucket
       Runtime: python3.8
       Handler: !Ref LambdaHandler
   IAM:
@@ -71,4 +71,4 @@ Resources:
   DestinationBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-        BucketName: !Ref S3Destbucket
+        BucketName: !Ref S3DestinationBucket
