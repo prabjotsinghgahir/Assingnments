@@ -64,10 +64,6 @@ Resources:
             Principal:
               Service: lambda.amazonaws.com
             Action: 'sts:AssumeRole'
-  Version:
-    Type: 'AWS::Lambda::Version'
-    Properties:
-      FunctionName: !Ref LambdaFunction
   DestinationBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
