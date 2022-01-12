@@ -24,8 +24,6 @@ Resources:
         LambdaConfigurations:
           - Event: 's3:ObjectCreated:*'
             Function: !GetAtt LambdaFunction.Arn
-    DependsOn:
-      - LambdaPermission
   LambdaPermission:
     Type: 'AWS::Lambda::Permission'
     Properties:
@@ -39,8 +37,6 @@ Resources:
         Ref: 'AWS::AccountId'
       SourceArn:
         'Fn::Sub': 'arn:aws:s3:::${S3BucketName}'
-    DependsOn:
-      - LambdaFunction
   LambdaFunction:
     Type: 'AWS::Lambda::Function'
     Properties:
