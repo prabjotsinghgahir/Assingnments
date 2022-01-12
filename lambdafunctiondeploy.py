@@ -4,9 +4,10 @@ import shutil
 
 
 class ZipAndUploadLambda:
-    def __init__(self, file_zip, lambda_code_bucket):
+    def __init__(self, file_zip, lambda_code_bucket, region):
         self.file_zip = file_zip
         self.lambda_code_bucket = lambda_code_bucket
+        self.region = region
 
     def zipping(self):
         cwd = os.getcwd()
@@ -21,7 +22,7 @@ class ZipAndUploadLambda:
             lambda_upload.create_bucket(
                 Bucket=self.lambda_code_bucket,
                 CreateBucketConfiguration={
-                    'LocationConstraint': 'ap-south-1'
+                    'LocationConstraint': self.region
                 },
             )
         except lambda_upload.exceptions.BucketAlreadyOwnedByYou:

@@ -8,6 +8,7 @@ lambda_code_bucket = 'code-bucket-psg'
 stack_name = 'assignment1'
 source_bucket_name = 'source-bucket-psg'
 destination_bucket_name = 'destination-bucket-psg'
+region = 'ap-south-1'
 
 
 parameter = [
@@ -37,7 +38,7 @@ parameter = [
 opening_temp = open(template_name)
 reading = opening_temp.read()
 
-call_class_lambda = lambdafunctiondeploy.ZipAndUploadLambda(file_zip, lambda_code_bucket)
+call_class_lambda = lambdafunctiondeploy.ZipAndUploadLambda(file_zip, lambda_code_bucket, region)
 call_create_stack = PythonDeploy_Code.StackCreation(stack_name, reading, parameter)
 
 call_class_lambda.zipping()
