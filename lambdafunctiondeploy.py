@@ -27,10 +27,8 @@ class ZipAndUploadLambda:
             )
         except lambda_upload.exceptions.BucketAlreadyOwnedByYou:
             pass
-        #file_zip = file_zip.split('.')
+        # file_zip = file_zip.split('.')
         cwd = os.path.join(os.getcwd(), 'lambda_zips')
         file_zip_one = self.file_zip.split('.')[0] + ".zip"
         cwd = os.path.join(cwd, file_zip_one)
         lambda_upload.upload_file(cwd, self.lambda_code_bucket, file_zip_one)
-
-
