@@ -55,8 +55,6 @@ Resources:
   IAM:
     Type: 'AWS::IAM::Role'
     Properties:
-      ManagedPolicyArns:
-        - 'arn:aws:iam::aws:policy/AmazonS3FullAccess'
       AssumeRolePolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -64,6 +62,24 @@ Resources:
             Principal:
               Service: lambda.amazonaws.com
             Action: 'sts:AssumeRole'
+      Policies:
+        - PolicyName: Assignment
+          PolicyDocument:
+            {
+                "Version": "2012-10-17",
+                "Statement": [
+                    {
+                        "Effect": "Allow",
+                        "Action": [
+                            "s3:Get*",
+                            "s3:Put*",
+                            "s3:Copy*",
+                            "s3:List*",
+                        ],
+                        "Resource": "*"
+                    }
+                ]
+            }
   DestinationBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
