@@ -76,7 +76,9 @@ Resources:
                             "s3:Copy*",
                             "s3:List*",
                         ],
-                        "Resource": "*"
+                        "Resource":
+                          - !Ref S3BucketName
+                          - !Ref S3DestinationBucket
                     }
                 ]
             }
