@@ -76,9 +76,10 @@ Resources:
                             "s3:Copy*",
                             "s3:List*",
                         ],
-                        "Resource":
-                          - !Ref S3BucketName
-                          - !Ref S3DestinationBucket
+                        "Resource": [
+                            'Fn::Sub': 'arn:aws:s3:::${S3BucketName}/*',
+                            'Fn::Sub': 'arn:aws:s3:::${S3DestinationBucket}/*'
+                        ]
                     }
                 ]
             }
