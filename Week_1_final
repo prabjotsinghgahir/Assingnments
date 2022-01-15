@@ -71,10 +71,8 @@ Resources:
                     {
                         "Effect": "Allow",
                         "Action": [
-                            "s3:Get*",
-                            "s3:Put*",
-                            "s3:Copy*",
-                            "s3:List*",
+                            "s3:PutObject",
+                            "s3:GetObject"
                         ],
                         "Resource": [
                             'Fn::Sub': 'arn:aws:s3:::${S3BucketName}/*',
