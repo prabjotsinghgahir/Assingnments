@@ -1,4 +1,5 @@
 import boto3
+from botocore.exceptions import WaiterError
 
 client = boto3.client('cloudformation')
 
@@ -21,6 +22,8 @@ class StackCreation:
             waiter = client.get_waiter('stack_create_complete')
             waiter.wait(StackName=self.stack_name)
             print("Stack Created")
+        except WaiterError:
+            pass
         except client.exceptions.AlreadyExistsException:
             print("Updating stack")
             try:
@@ -33,6 +36,8 @@ class StackCreation:
                 )
                 waiter = client.get_waiter('stack_update_complete')
                 waiter.wait(StackName=self.stack_name)
+            except WaiterError:
+                pass
             except client.exceptions.ClientError as err:
                 print("Printing Error:  ", err)
             print("stack Updated")
