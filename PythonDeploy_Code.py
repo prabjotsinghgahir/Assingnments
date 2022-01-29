@@ -30,7 +30,6 @@ class StackCreation:
                 client.update_stack(
                     StackName=self.stack_name,
                     TemplateBody=self.reading,
-                    # UsePreviousTemplate=True,
                     Capabilities=['CAPABILITY_IAM'],
                     Parameters=self.parameter
                 )
