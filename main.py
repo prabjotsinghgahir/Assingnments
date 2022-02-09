@@ -1,8 +1,8 @@
-import PythonDeploy_Code
-import lambdafunctiondeploy
+import python_deploy_code
+import lambda_function_deploy
 
 
-template_name = 'Week_1_final'
+template_name = 'template'
 file_zip = 'lambda-zip.py'
 lambda_code_bucket = 'code-bucket-psg'
 stack_name = 'assignment1'
@@ -38,8 +38,8 @@ parameter = [
 opening_temp = open(template_name)
 reading = opening_temp.read()
 
-call_class_lambda = lambdafunctiondeploy.ZipAndUploadLambda(file_zip, lambda_code_bucket, region)
-call_create_stack = PythonDeploy_Code.StackCreation(stack_name, reading, parameter)
+call_class_lambda = lambda_function_deploy.ZipAndUploadLambda(file_zip, lambda_code_bucket, region)
+call_create_stack = python_deploy_code.StackCreation(stack_name, reading, parameter)
 
 call_class_lambda.zipping()
 print("Done calling zipper")
