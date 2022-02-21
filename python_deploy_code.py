@@ -48,6 +48,15 @@ class StackCreation:
         res = response['Stacks'][0]['StackStatus']
         print(res)
         if res == 'ROLLBACK_COMPLETE':
+            stack_events = client.describe_stack_events(StackName=self.stack_name)['StackEvents']
+            for i in stack_events:
+                try:
+                    print(i['LogicalResourceId'], end=" ")
+                    print(i['ResourceType'], end="  ")
+                    print(i['ResourceStatus'], end="  ")
+                    print(i['ResourceStatusReason'])
+                except KeyError:
+                    pass
             client.delete_stack(
                 StackName=self.stack_name
             )
