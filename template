@@ -27,23 +27,16 @@ Resources:
   LambdaPermission:
     Type: 'AWS::Lambda::Permission'
     Properties:
-      FunctionName:
-        'Fn::GetAtt':
-          - LambdaFunction
-          - Arn
+      FunctionName: !GetAtt LambdaFunction.Arn
       Action: 'lambda:InvokeFunction'
       Principal: s3.amazonaws.com
       SourceAccount:
         Ref: 'AWS::AccountId'
-      SourceArn:
-        'Fn::Sub': 'arn:aws:s3:::${S3BucketName}'
+      SourceArn: !Sub 'arn:aws:s3:::${S3BucketName}'
   LambdaFunction:
     Type: 'AWS::Lambda::Function'
     Properties:
-      Role:
-        'Fn::GetAtt':
-          - IAM
-          - Arn
+      Role: !GetAtt IAM.Arn
       Code:
         S3Bucket: !Ref LambdaCodeBucket
         S3Key: !Ref LambdaKey
