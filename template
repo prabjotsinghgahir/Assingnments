@@ -71,6 +71,15 @@ Resources:
                             'Fn::Sub': 'arn:aws:s3:::${S3BucketName}/*',
                             'Fn::Sub': 'arn:aws:s3:::${S3DestinationBucket}/*'
                         ]
+                    },
+                    {
+                        "Effect": "Allow",
+                        "Action": [
+                            "logs:CreateLogGroup",
+                            "logs:CreateLogStream",
+                            "logs:PutLogEvents"
+                        ],
+                        "Resource": !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:*"
                     }
                 ]
             }
